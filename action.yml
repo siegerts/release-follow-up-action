@@ -9,9 +9,9 @@ inputs:
     description: The GitHub token used to create an authenticated client
     default: ${{secrets.GITHUB_TOKEN}}
     required: true
-  # dry-run:
-  #   description: Log proposed updates against referenced items instead of modifying resources
-  #   default: false
+  dry-run:
+    description: Log proposed updates against referenced items instead of modifying resources
+    default: false
 
 runs:
   using: "node12"

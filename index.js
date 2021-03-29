@@ -16,7 +16,7 @@ const core = require("@actions/core");
  */
 async function run() {
   const token = core.getInput("github-token", { required: true });
-  // const dryRun = core.getInput("dry-run");
+  const dryRun = core.getInput("dry-run");
 
   const octo = github.getOctokit(token);
 
@@ -28,6 +28,8 @@ async function run() {
   if (!repo || !release) {
     core.setFailed(error.message);
   }
+
+  core.info(`Run mode: ${dryRun ? "dry-run" : "production"}`);
 
   // release
   const releaseName = release.tag_name;
@@ -84,32 +86,43 @@ async function run() {
         );
 
         if (isPendingRelease) {
-          await octo.issues.removeLabel({
+          if (!dryRun) {
+            await octo.issues.removeLabel({
+              owner: repo.owner,
+              repo: repo.repo,
+              issue_number: issueNumber,
+              name: "pending-release",
+            });
+          } else {
+            core.info(`--removing label <pending-release>`);
+          }
+        }
+
+        if (!dryRun) {
+          await octo.issues.addLabels({
             owner: repo.owner,
             repo: repo.repo,
             issue_number: issueNumber,
-            name: "pending-release",
+            labels: ["referenced-in-release"],
           });
+
+          const commentBody = `
+     👋 Hi, this ${issueTypeName} was referenced in the **${releaseName}** release!\n\n \
+  
+     Check out the release notes here ${release.html_url}.
+           `;
+          await octo.issues.createComment({
+            issue_number: issueNumber,
+            owner: repo.owner,
+            repo: repo.repo,
+            body: commentBody,
+          });
+        } else {
+          core.info(`--adding label <referenced-in-release>`);
+          core.info(
+            `--adding comment of type ${issueTypeName} for **${releaseName}** release`
+          );
         }
-
-        await octo.issues.addLabels({
-          owner: repo.owner,
-          repo: repo.repo,
-          issue_number: issueNumber,
-          labels: ["referenced-in-release"],
-        });
-
-        const commentBody = `
-   👋 Hi, this ${issueTypeName} was referenced in the **${releaseName}** release!\n\n \
-
-   Check out the release notes here ${release.html_url}.
-         `;
-        await octo.issues.createComment({
-          issue_number: issueNumber,
-          owner: repo.owner,
-          repo: repo.repo,
-          body: commentBody,
-        });
       } else {
         core.info(
           `Referenced issue (#${issueNumber}) does not exist. Skipping...`
