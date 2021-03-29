@@ -29,9 +29,10 @@ module.exports = findIssues;
 /***/ 2932:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const findIssues = __nccwpck_require__(8827);
 const github = __nccwpck_require__(5438);
 const core = __nccwpck_require__(2186);
+
+const findIssues = __nccwpck_require__(8827);
 
 /**
  * Follow up on issues and PRs, open or closed/merged,
