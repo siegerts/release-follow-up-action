@@ -1,6 +1,7 @@
-const findIssues = require("./findIssues");
 const github = require("@actions/github");
 const core = require("@actions/core");
+
+const findIssues = require("./findIssues");
 
 /**
  * Follow up on issues and PRs, open or closed/merged,
@@ -19,7 +20,6 @@ async function run() {
   const octo = github.getOctokit(token);
 
   // context
-  const context = octo.context;
   const repo = context.repo;
   const release = context.payload.release;
 
