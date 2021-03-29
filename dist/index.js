@@ -51,7 +51,6 @@ async function run() {
   const octo = github.getOctokit(token);
 
   // context
-  const context = octo.context;
   const repo = context.repo;
   const release = context.payload.release;
 
