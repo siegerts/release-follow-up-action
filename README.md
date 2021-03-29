@@ -17,7 +17,7 @@ on:
 jobs:
   follow-up:
     steps:
-      - uses: siegerts/github-release-commenter@v1
+      - uses: siegerts/release-follow-up@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
