@@ -1,3 +1,4 @@
+const findIssues = require("./findIssues");
 const github = require("@actions/github");
 const core = require("@actions/core");
 
@@ -9,9 +10,6 @@ const core = require("@actions/core");
  * The relevant issues are parsed from the release
  * changelog and only recognized if present in the
  * current repo (i.e. where the release is published).
- *
- * @param {string} `github-token`
- * @param {boolean} `dry-run`
  *
  */
 async function run() {
@@ -35,16 +33,7 @@ async function run() {
   const releaseName = release.tag_name;
   const releaseBody = release.body;
 
-  // parse release notes for issue (includes PR)
-  // numbers in the current repo
-  const issuePattern = `\/${repo.repo}\/issues\/([0-9]+)+?`;
-  const issueRE = new RegExp(issuePattern, "gim");
-
-  // match and dedupe
-  const matches = new Set(
-    [...releaseBody.matchAll(issueRE)].map((issue) => issue[1])
-  );
-  const issues = [...matches];
+  const issues = findIssues(releaseBody, repo.repo);
 
   if (Array.isArray(issues) && issues.length) {
     core.info(
