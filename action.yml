@@ -1,13 +1,18 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: release-follow-up
+author: siegerts
+description: Follow up on referenced issues and PRs after a release is published
+branding:
+  color: blue
+  icon: code
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  github-token:
+    description: The GitHub token used to create an authenticated client
+    default: ${{secrets.GITHUB_TOKEN}}
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  # dry-run:
+  #   description: Log proposed updates against referenced items instead of modifying resources
+  #   default: false
+
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
