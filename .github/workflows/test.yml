@@ -16,19 +16,19 @@ jobs:
       - run: npm test
 
   # test action works running from the graph
-  dry:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          dry-run: true
+  # dry:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: ./
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         dry-run: true
 
-  prod:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  # prod:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: ./
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
