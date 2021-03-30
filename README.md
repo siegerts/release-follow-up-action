@@ -2,7 +2,7 @@
 
 Follow up on issues and PRs, open or closed/merged, after a release is published. The corresponding `pending-release` label will be removed if it's present `referenced-in-release` label added. :rocket:
 
-![](https://github.com/siegerts/release-follow-up-action/tree/main/assets/release-followup.png)
+![](https://github.com/siegerts/release-follow-up-action/raw/main/assets/release-follow-up.png)
 
 The relevant issues are parsed from the release body (i.e. changelog/notes) and only recognized if present in the current repo (i.e. where the release is published).
 
