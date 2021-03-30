@@ -100,9 +100,9 @@ async function run() {
           });
 
           const commentBody = `
-     👋 Hi, this ${issueTypeName} was referenced in the **${releaseName}** release!\n\n \
-  
-     Check out the release notes here ${release.html_url}.
+👋 Hi, this ${issueTypeName} was referenced in the **${releaseName}** release!\n\n \
+
+Check out the release notes here ${release.html_url}.
            `;
           await octo.issues.createComment({
             issue_number: issueNumber,
