@@ -51,6 +51,12 @@ async function run() {
   const dryRun =
     (core.getInput("dry-run", { required: false }) || "false") === "true";
 
+  const pendingReleaseLabel =
+    core.getInput("pending-release-label") || "pending-release";
+
+  const referencedInReleaseLabel =
+    core.getInput("referenced-in-release-label") || "referenced-in-release";
+
   const octo = github.getOctokit(token);
 
   // context
@@ -106,7 +112,7 @@ async function run() {
           : "issue";
 
         const isPendingRelease = labels.some(
-          ({ name }) => name === "pending-release"
+          ({ name }) => name === pendingReleaseLabel
         );
 
         if (isPendingRelease) {
@@ -115,10 +121,10 @@ async function run() {
               owner: repo.owner,
               repo: repo.repo,
               issue_number: issueNumber,
-              name: "pending-release",
+              name: pendingReleaseLabel,
             });
           } else {
-            core.info(`--removing label <pending-release>`);
+            core.info(`--removing label <${pendingReleaseLabel}>`);
           }
         }
 
@@ -127,7 +133,7 @@ async function run() {
             owner: repo.owner,
             repo: repo.repo,
             issue_number: issueNumber,
-            labels: ["referenced-in-release"],
+            labels: [referencedInReleaseLabel],
           });
 
           const commentBody = `
@@ -142,7 +148,7 @@ Check out the release notes here ${release.html_url}.
             body: commentBody,
           });
         } else {
-          core.info(`--adding label <referenced-in-release>`);
+          core.info(`--adding label <${referencedInReleaseLabel}>`);
           core.info(
             `--adding comment of type ${issueTypeName} for **${releaseName}** release`
           );
