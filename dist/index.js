@@ -46,7 +46,10 @@ const findIssues = __nccwpck_require__(8827);
  */
 async function run() {
   const token = core.getInput("github-token", { required: true });
-  const dryRun = core.getInput("dry-run");
+
+  // https://github.com/actions/toolkit/issues/361
+  const dryRun =
+    (core.getInput("dry-run", { required: false }) || "false") === "true";
 
   const octo = github.getOctokit(token);
 
