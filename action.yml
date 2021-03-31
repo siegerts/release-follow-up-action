@@ -1,4 +1,4 @@
-name: release-follow-up
+name: Release Follow Up
 author: siegerts
 description: Follow up on referenced issues and PRs after a release is published
 branding:

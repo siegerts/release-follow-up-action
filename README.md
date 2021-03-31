@@ -31,8 +31,9 @@ on:
 
 jobs:
   follow-up:
+    runs-on: ubuntu-latest
     steps:
-      - uses: siegerts/release-follow-up@v1
+      - uses: siegerts/release-follow-up-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -47,8 +48,9 @@ on:
 
 jobs:
   follow-up:
+    runs-on: ubuntu-latest
     steps:
-      - uses: siegerts/release-follow-up@v1
+      - uses: siegerts/release-follow-up-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           dry-run: true
@@ -75,12 +77,11 @@ on:
 
 jobs:
   follow-up:
+    runs-on: ubuntu-latest
     steps:
-      - uses: siegerts/release-follow-up@v1
+      - uses: siegerts/release-follow-up-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pending-release-label: to-be-released
           referenced-in-release-label: already-released
 ```
-
-See the [actions tab](https://github.com/siegerts/github-release-commenter-action/actions) for runs of this action! :rocket:
