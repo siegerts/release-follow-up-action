@@ -54,6 +54,17 @@ jobs:
           dry-run: true
 ```
 
+**Output in the workflow run log**
+
+```
+Run mode: dry-run
+Issues referenced in the v1.0 release: 5
+Updating issue #5...
+--removing label <pending-release>
+--adding label <referenced-in-release>
+--adding comment of type issue for **v1.0** release
+```
+
 #### Using different labels
 
 ```yaml
