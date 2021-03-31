@@ -16,6 +16,7 @@ const findIssues = require("./findIssues");
 async function run() {
   const token = core.getInput("github-token", { required: true });
 
+  // core.getInput treats YAML booleans as strings
   // https://github.com/actions/toolkit/issues/361
   const dryRun =
     (core.getInput("dry-run", { required: false }) || "false") === "true";
