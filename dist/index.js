@@ -10,12 +10,15 @@ require('./sourcemap-register.js');module.exports =
  * numbers in the current repo
  */
 let findIssues = function (releaseBody, repo) {
+  if (!releaseBody || !repo) {
+    throw "Release body and repo identifier are required!";
+  }
   const issuePattern = `\/${repo}\/issues\/([0-9]+)+?`;
   const issueRE = new RegExp(issuePattern, "gim");
 
   // match and dedupe
   const matches = new Set(
-    [...releaseBody.matchAll(issueRE)].map((issue) => issue[1])
+    [...releaseBody.matchAll(issueRE)].map((issue) => +issue[1])
   );
 
   return [...matches];
@@ -47,6 +50,7 @@ const findIssues = __nccwpck_require__(8827);
 async function run() {
   const token = core.getInput("github-token", { required: true });
 
+  // core.getInput treats YAML booleans as strings
   // https://github.com/actions/toolkit/issues/361
   const dryRun =
     (core.getInput("dry-run", { required: false }) || "false") === "true";
