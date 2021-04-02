@@ -1,6 +1,6 @@
 {
   "name": "release-follow-up",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Follow up on referenced issues and PRs after a release is published.",
   "main": "index.js",
   "scripts": {

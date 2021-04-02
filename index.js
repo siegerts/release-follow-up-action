@@ -35,7 +35,9 @@ async function run() {
   const release = context.payload.release;
 
   if (!repo || !release) {
-    core.setFailed(error.message);
+    core.setFailed(
+      "The repo and release information is required in the incoming webhook ."
+    );
   }
 
   core.info(`Run mode: ${dryRun ? "dry-run" : "production"}`);

@@ -1,6 +1,6 @@
-# Release follow up
+# Release follow up :memo:
 
-Follow up on issues and PRs after a release is published. The corresponding `pending-release` label will be removed if it's present and the`referenced-in-release` label added. :rocket:
+Follow up on issues and PRs after a release is published. The corresponding `pending-release` label will be removed if it's present and the`referenced-in-release` label added.
 
 ![](https://github.com/siegerts/release-follow-up-action/raw/main/assets/release-follow-up.png)
 
@@ -12,12 +12,12 @@ The relevant issues are parsed from the release body (i.e. changelog/notes) and 
 
 ## Inputs
 
-| Input                         | Default                 | Description                                                                  |
-| ----------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
-| `github-token`                |                         | The GitHub token used to create an authenticated client                      |
-| `pending-release-label`       | `pending-release`       | Label to remove from referenced issues, if exists                            |
-| `referenced-in-release-label` | `referenced-in-release` | Label to add to referenced issues                                            |
-| `dry-run`                     | `false`                 | Log proposed updates against referenced items instead of modifying resources |
+| Input                         | Default                 | Required | Description                                                                  |
+| ----------------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------- |
+| `github-token`                |                         | true     | The GitHub token used to create an authenticated client                      |
+| `pending-release-label`       | `pending-release`       | false    | Label to remove from referenced issues, if exists                            |
+| `referenced-in-release-label` | `referenced-in-release` | false    | Label to add to referenced issues                                            |
+| `dry-run`                     | `false`                 | false    | Log proposed updates against referenced items instead of modifying resources |
 
 ## Usage
 
