@@ -46,7 +46,8 @@ async function run() {
   const releaseName = release.tag_name;
   const releaseBody = release.body;
 
-  const issues = findIssues(releaseBody, repo.repo);
+  const issues =
+    releaseBody && repo.repo ? findIssues(releaseBody, repo.repo) : [];
 
   if (Array.isArray(issues) && issues.length) {
     core.info(
