@@ -3,9 +3,10 @@
  * numbers in the current repo
  */
 let findIssues = function (releaseBody, repo) {
-  if (!releaseBody || !repo) {
-    throw "Release body and repo identifier are required!";
+  if (!releaseBody) {
+    return [];
   }
+
   const issuePattern = `\/${repo}\/issues\/([0-9]+)+?`;
   const issueRE = new RegExp(issuePattern, "gim");
 
